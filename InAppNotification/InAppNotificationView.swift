@@ -117,7 +117,7 @@ class InAppNotificationView: UIView {
             self.containerView.addGestureRecognizer(self.tapGesture)
         })
 
-        prepareForClosingBanner()
+        countDownToCloseBanner()
     }
 
     func closeBanner() {
@@ -132,7 +132,7 @@ class InAppNotificationView: UIView {
         })
     }
 
-    func prepareForClosingBanner() {
+    func countDownToCloseBanner() {
         bannerClosingTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { [weak self] _ in
             self?.closeBanner()
         }
@@ -159,8 +159,9 @@ class InAppNotificationView: UIView {
             } else {
                 UIView.animate(withDuration: 0.2) {
                     self.containerView.transform = .identity
+                    self.currentPositionY = 0
                 }
-                prepareForClosingBanner()
+                countDownToCloseBanner()
             }
 
         default:
@@ -174,7 +175,6 @@ class InAppNotificationView: UIView {
         notification.onTap?()
     }
 
-    // メモリリークを防ぐためにオブジェクトを解放する
     func deallocate() {
         containerView.removeGestureRecognizer(panGesture)
         containerView.removeGestureRecognizer(tapGesture)
