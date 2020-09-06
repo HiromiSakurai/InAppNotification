@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK:- Protocol
 protocol InAppNotificationShowable {
     func showInAppNotification(_ notification: InAppNotification)
 }
