@@ -53,8 +53,8 @@ class InAppNotificationView: UIView {
     let bannerMargin = CGFloat(12)
 
     // MARK:- Gesture
-    lazy var panGesture = UIPanGestureRecognizer(target: self, action: #selector(pan))
-    lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
+    lazy var panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPanned))
+    lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapped))
 
     var currentPositionY: CGFloat = 0
 
@@ -140,7 +140,7 @@ class InAppNotificationView: UIView {
     }
 
     @objc
-    func pan(_ sender: UIPanGestureRecognizer) {
+    func didPanned(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began:
             bannerClosingTimer = nil
@@ -171,7 +171,7 @@ class InAppNotificationView: UIView {
     }
 
     @objc
-    func tap(_ sender: UITapGestureRecognizer) {
+    func didTapped(_ sender: UITapGestureRecognizer) {
         closeBanner()
         notification.onTap?()
     }
